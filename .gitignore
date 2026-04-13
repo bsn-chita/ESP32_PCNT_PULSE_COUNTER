@@ -1,0 +1,14 @@
+# Временные файлы сборки
+build/
+sdkconfig
+sdkconfig.old
+
+# Временные файлы Kate и других редакторов
+*~
+*.swp
+.*.swp
+.kate-swp
+
+# Скачанные зависимости (они подтянутся сами по idf_component.yml)
+managed_components/
+dependencies.lock
