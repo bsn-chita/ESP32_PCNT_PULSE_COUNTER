@@ -1,0 +1,66 @@
+menu "Encoder PCNT Settings"
+
+        # Выбор для пина A
+    choice PCNT_PIN_A_SELECT
+        prompt "Select GPIO for Pulse Input (Phase A)"
+        default PCNT_PIN_A_GPIO_4
+        help
+            Выберите один из разрешенных GPIO для фазы A.
+
+        config PCNT_PIN_A_GPIO_4
+            bool "GPIO 4"
+        config PCNT_PIN_A_GPIO_5
+            bool "GPIO 5"
+        config PCNT_PIN_A_GPIO_18
+            bool "GPIO 18"
+    endchoice
+
+    # Невидимый конфиг для получения самого числа
+    config PCNT_PIN_A
+        int
+        default 4 if PCNT_PIN_A_GPIO_4
+        default 5 if PCNT_PIN_A_GPIO_5
+        default 18 if PCNT_PIN_A_GPIO_18
+
+    # Аналогично для пина B
+    choice PCNT_PIN_B_SELECT
+        prompt "Select GPIO for Control Input (Phase B)"
+        default PCNT_PIN_B_GPIO_19
+
+        config PCNT_PIN_B_GPIO_19
+            bool "GPIO 19"
+        config PCNT_PIN_B_GPIO_21
+            bool "GPIO 21"
+    endchoice
+
+    config PCNT_PIN_B
+        int
+        default 19 if PCNT_PIN_B_GPIO_19
+        default 21 if PCNT_PIN_B_GPIO_21
+
+    config PCNT_USE_INDEX_PIN
+        bool "Enable Index (Z) pin"
+        default n
+        help
+            Включите, если используете индексный сигнал для сброса счетчика.
+
+    choice PCNT_PIN_Z_SELECT
+        prompt "Select GPIO for Index (Z)"
+        depends on PCNT_USE_INDEX_PIN
+        default PCNT_PIN_Z_GPIO_22
+
+        config PCNT_PIN_Z_GPIO_22
+            bool "GPIO 22"
+        config PCNT_PIN_Z_GPIO_23
+            bool "GPIO 23"
+        config PCNT_PIN_Z_GPIO_34  # Только вход
+            bool "GPIO 34 (Input Only)"
+    endchoice
+
+    config PCNT_PIN_Z
+        int
+        default 22 if PCNT_PIN_Z_GPIO_22
+        default 23 if PCNT_PIN_Z_GPIO_23
+        default 34 if PCNT_PIN_Z_GPIO_34
+        default -1 if !PCNT_USE_INDEX_PIN
+endmenu
