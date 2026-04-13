@@ -25,3 +25,15 @@ Include Guards (защита от повторного включения). Ст
 #include "driver/pulse_cnt.h"
 // ...
 ```
+
+В самом pcnt_encoder.c хорошим тоном считается проверка, включен ли вообще этот компонент в menuconfig. Это позволяет легко "вырезать" весь код из прошивки одной галочкой.
+
+```c
+#include "pcnt_encoder.h"
+
+#if CONFIG_PCNT_ENABLE // Название вашей главной опции из Kconfig
+
+// Весь код файла pcnt_encoder.c
+
+#endif
+```
