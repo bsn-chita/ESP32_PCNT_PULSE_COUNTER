@@ -33,6 +33,31 @@ int64_t get_encoder_total_pulses(pcnt_unit_handle_t unit) {
     return total + cur_hw_val;
 }
 
+// Исправленный метод.
+//
+//int64_t get_encoder_total_pulses(pcnt_unit_handle_t unit) {
+//   int cur_hw_val;
+//    int64_t total;
+//    int64_t result;
+//
+//    do {
+//        // 1. Сначала берем накопленную сумму из прерываний
+//        total = total_pulses;
+//        // 2. Сразу берем текущее значение из "железа"
+//        pcnt_unit_get_count(unit, &cur_hw_val);
+//
+//        // 3. Вычисляем итоговую позицию
+//        result = total + cur_hw_val;
+//
+//        // 4. ПРОВЕРКА: если пока мы считали п.1 и п.2, случилось прерывание,
+//        // то значение total_pulses изменилось. Значит, наш результат (result)
+//        // уже может быть "смесью" старых и новых данных. Пересчитываем.
+//    } while (total != total_pulses);
+//
+//    return result;
+//}
+
+
 //Обработчик прерывания ПЕРЕПОЛНЕНИЯ счетчика.
 //Вызывается аппаратно, когда счетчик доходит до 32767 или -32768.
 static bool IRAM_ATTR on_pcnt_reach_limit(pcnt_unit_handle_t unit, const pcnt_watch_event_data_t *edata, void *user_ctx) {
@@ -57,6 +82,27 @@ static void IRAM_ATTR encoder_z_isr_handler(void *arg) {
     // z_pos_absolute = (int64_t)(total_pulses + current_hw_val);
     z_pos_absolute = total_pulses + current_hw_val;
 }
+
+// Исключает ситуацию когда когда данные поменялись перед чтением(64 читается как два 32 последовательно)
+//
+//static void IRAM_ATTR encoder_z_isr_handler(void *arg) {
+//    int current_hw_val = 0;
+//    int64_t total_before, total_after;
+//    pcnt_unit_handle_t unit = (pcnt_unit_handle_t)arg;
+//
+//    // Читаем total_pulses до и после получения значения из HW
+//    total_before = total_pulses;
+//    pcnt_unit_get_count(unit, &current_hw_val);
+//    total_after = total_pulses;
+//
+//    // Если за время чтения HW-счетчика основная сумма изменилась,
+//    // значит произошло переполнение. Читаем HW еще раз, чтобы данные совпали.
+//    if (total_before != total_after) {
+//        pcnt_unit_get_count(unit, &current_hw_val);
+//    }
+//
+//    z_pos_absolute = total_after + current_hw_val;
+//}
 
 // << Инициализация PCNT
 pcnt_unit_handle_t init_encoder() {
