@@ -2,6 +2,18 @@ https://share.google/aimode/Rpqj61Ofw9J3qGZrA
 
 https://share.google/aimode/n0nhzknE9RzIfUEem
 
+kate ~/.bash_aliases
+
+lazy() {
+    git pull
+    git add -A
+    git commit -m "$1"
+    git push
+}
+
+lazy "Lazy commit"
+
+
 1. Добавить в menuconfig настройки для проекта:
     - Настройки PCNT
         - PCNT_PIN_A
