@@ -1,66 +1,208 @@
-menu "Encoder PCNT Settings"
+menu "Настройки энкодера (PCNT)"
 
-        # Выбор для пина A
+    # Выбор для пина A ******************************************************************************************
+
     choice PCNT_PIN_A_SELECT
-        prompt "Select GPIO for Pulse Input (Phase A)"
-        default PCNT_PIN_A_GPIO_4
+        prompt "Выберите GPIO для Фазы А (Pulse Input - Phase A)"
+        default PCNT_PIN_A_GPIO_25
         help
             Выберите один из разрешенных GPIO для фазы A.
 
-        config PCNT_PIN_A_GPIO_4
-            bool "GPIO 4"
-        config PCNT_PIN_A_GPIO_5
-            bool "GPIO 5"
+        config PCNT_PIN_A_GPIO_16
+            bool "GPIO 16"
+        config PCNT_PIN_A_GPIO_17
+            bool "GPIO 17"
         config PCNT_PIN_A_GPIO_18
             bool "GPIO 18"
+        config PCNT_PIN_A_GPIO_19
+            bool "GPIO 19"
+        config PCNT_PIN_A_GPIO_21
+            bool "GPIO 21"
+        config PCNT_PIN_A_GPIO_22
+            bool "GPIO 22"
+        config PCNT_PIN_A_GPIO_23
+            bool "GPIO 23"
+        config PCNT_PIN_A_GPIO_25
+            bool "GPIO 25"
+        config PCNT_PIN_A_GPIO_26
+            bool "GPIO 26"
+        config PCNT_PIN_A_GPIO_27
+            bool "GPIO 27"
+        config PCNT_PIN_A_GPIO_32
+            bool "GPIO 32"
+        config PCNT_PIN_A_GPIO_33
+            bool "GPIO 33"
+        config PCNT_PIN_A_GPIO_34
+            bool "GPIO 34 Нет внутренних подтягивающих резисторов. Требуются внешние резисторы 1(4.7)--10кОм к 3.3v"
+        config PCNT_PIN_A_GPIO_35
+            bool "GPIO 35 Нет внутренних подтягивающих резисторов. Требуются внешние резисторы 1(4.7)--10кОм к 3.3v"
+        config PCNT_PIN_A_GPIO_36
+            bool "GPIO 36 Нет внутренних подтягивающих резисторов. Требуются внешние резисторы 1(4.7)--10кОм к 3.3v"
+        config PCNT_PIN_A_GPIO_39
+            bool "GPIO 39 Нет внутренних подтягивающих резисторов. Требуются внешние резисторы 1(4.7)--10кОм к 3.3v"
+
     endchoice
 
-    # Невидимый конфиг для получения самого числа
     config PCNT_PIN_A
         int
-        default 4 if PCNT_PIN_A_GPIO_4
-        default 5 if PCNT_PIN_A_GPIO_5
+        default 16 if PCNT_PIN_A_GPIO_16
+        default 17 if PCNT_PIN_A_GPIO_17
         default 18 if PCNT_PIN_A_GPIO_18
+        default 19 if PCNT_PIN_A_GPIO_19
+        default 21 if PCNT_PIN_A_GPIO_21
+        default 22 if PCNT_PIN_A_GPIO_22
+        default 23 if PCNT_PIN_A_GPIO_23
+        default 25 if PCNT_PIN_A_GPIO_25
+        default 26 if PCNT_PIN_A_GPIO_26
+        default 27 if PCNT_PIN_A_GPIO_27
+        default 32 if PCNT_PIN_A_GPIO_32
+        default 33 if PCNT_PIN_A_GPIO_33
+        default 34 if PCNT_PIN_A_GPIO_34
+        default 35 if PCNT_PIN_A_GPIO_35
+        default 36 if PCNT_PIN_A_GPIO_36
+        default 39 if PCNT_PIN_A_GPIO_39
 
-    # Аналогично для пина B
+    # Выбор для пина A ******************************************************************************************
+
+    # Выбор для пина B ******************************************************************************************
+
     choice PCNT_PIN_B_SELECT
-        prompt "Select GPIO for Control Input (Phase B)"
-        default PCNT_PIN_B_GPIO_19
+        prompt "Выберите GPIO для Фазы B (Pulse Input - Phase B)"
+        default PCNT_PIN_B_GPIO_26
+        help
+            Выберите один из разрешенных GPIO для фазы B.
 
+        config PCNT_PIN_B_GPIO_16
+            bool "GPIO 16"
+        config PCNT_PIN_B_GPIO_17
+            bool "GPIO 17"
+        config PCNT_PIN_B_GPIO_18
+            bool "GPIO 18"
         config PCNT_PIN_B_GPIO_19
             bool "GPIO 19"
         config PCNT_PIN_B_GPIO_21
             bool "GPIO 21"
+        config PCNT_PIN_B_GPIO_22
+            bool "GPIO 22"
+        config PCNT_PIN_B_GPIO_23
+            bool "GPIO 23"
+        config PCNT_PIN_B_GPIO_25
+            bool "GPIO 25"
+        config PCNT_PIN_B_GPIO_26
+            bool "GPIO 26"
+        config PCNT_PIN_B_GPIO_27
+            bool "GPIO 27"
+        config PCNT_PIN_B_GPIO_32
+            bool "GPIO 32"
+        config PCNT_PIN_B_GPIO_33
+            bool "GPIO 33"
+        config PCNT_PIN_B_GPIO_34
+            bool "GPIO 34 Нет внутренних подтягивающих резисторов. Требуются внешние резисторы 1(4.7)--10кОм к 3.3v"
+        config PCNT_PIN_B_GPIO_35
+            bool "GPIO 35 Нет внутренних подтягивающих резисторов. Требуются внешние резисторы 1(4.7)--10кОм к 3.3v"
+        config PCNT_PIN_B_GPIO_36
+            bool "GPIO 36 Нет внутренних подтягивающих резисторов. Требуются внешние резисторы 1(4.7)--10кОм к 3.3v"
+        config PCNT_PIN_B_GPIO_39
+            bool "GPIO 39 Нет внутренних подтягивающих резисторов. Требуются внешние резисторы 1(4.7)--10кОм к 3.3v"
+
     endchoice
 
     config PCNT_PIN_B
         int
+        default 16 if PCNT_PIN_B_GPIO_16
+        default 17 if PCNT_PIN_B_GPIO_17
+        default 18 if PCNT_PIN_B_GPIO_18
         default 19 if PCNT_PIN_B_GPIO_19
         default 21 if PCNT_PIN_B_GPIO_21
+        default 22 if PCNT_PIN_B_GPIO_22
+        default 23 if PCNT_PIN_B_GPIO_23
+        default 25 if PCNT_PIN_B_GPIO_25
+        default 26 if PCNT_PIN_B_GPIO_26
+        default 27 if PCNT_PIN_B_GPIO_27
+        default 32 if PCNT_PIN_B_GPIO_32
+        default 33 if PCNT_PIN_B_GPIO_33
+        default 34 if PCNT_PIN_B_GPIO_34
+        default 35 if PCNT_PIN_B_GPIO_35
+        default 36 if PCNT_PIN_B_GPIO_36
+        default 39 if PCNT_PIN_B_GPIO_39
 
-    config PCNT_USE_INDEX_PIN
-        bool "Enable Index (Z) pin"
-        default n
-        help
-            Включите, если используете индексный сигнал для сброса счетчика.
+    # Выбор для пина B ******************************************************************************************
+
+    # Выбор для пина Z ******************************************************************************************
 
     choice PCNT_PIN_Z_SELECT
-        prompt "Select GPIO for Index (Z)"
-        depends on PCNT_USE_INDEX_PIN
-        default PCNT_PIN_Z_GPIO_22
+        prompt "Выберите GPIO для нулевой метки Z ( Z-signal / Index)"
+        default PCNT_PIN_Z_GPIO_27
+        help
+            Выберите один из разрешенных GPIO для нулевой метки Z.
 
+        config PCNT_PIN_Z_GPIO_16
+            bool "GPIO 16"
+        config PCNT_PIN_Z_GPIO_17
+            bool "GPIO 17"
+        config PCNT_PIN_Z_GPIO_18
+            bool "GPIO 18"
+        config PCNT_PIN_Z_GPIO_19
+            bool "GPIO 19"
+        config PCNT_PIN_Z_GPIO_21
+            bool "GPIO 21"
         config PCNT_PIN_Z_GPIO_22
             bool "GPIO 22"
         config PCNT_PIN_Z_GPIO_23
             bool "GPIO 23"
-        config PCNT_PIN_Z_GPIO_34  # Только вход
-            bool "GPIO 34 (Input Only)"
+        config PCNT_PIN_Z_GPIO_25
+            bool "GPIO 25"
+        config PCNT_PIN_Z_GPIO_26
+            bool "GPIO 26"
+        config PCNT_PIN_Z_GPIO_27
+            bool "GPIO 27"
+        config PCNT_PIN_Z_GPIO_32
+            bool "GPIO 32"
+        config PCNT_PIN_Z_GPIO_33
+            bool "GPIO 33"
+        config PCNT_PIN_Z_GPIO_34
+            bool "GPIO 34 Нет внутренних подтягивающих резисторов. Требуются внешние резисторы 1(4.7)--10кОм к 3.3v"
+        config PCNT_PIN_Z_GPIO_35
+            bool "GPIO 35 Нет внутренних подтягивающих резисторов. Требуются внешние резисторы 1(4.7)--10кОм к 3.3v"
+        config PCNT_PIN_Z_GPIO_36
+            bool "GPIO 36 Нет внутренних подтягивающих резисторов. Требуются внешние резисторы 1(4.7)--10кОм к 3.3v"
+        config PCNT_PIN_Z_GPIO_39
+            bool "GPIO 39 Нет внутренних подтягивающих резисторов. Требуются внешние резисторы 1(4.7)--10кОм к 3.3v"
+
     endchoice
 
     config PCNT_PIN_Z
         int
+        default 16 if PCNT_PIN_Z_GPIO_16
+        default 17 if PCNT_PIN_Z_GPIO_17
+        default 18 if PCNT_PIN_Z_GPIO_18
+        default 19 if PCNT_PIN_Z_GPIO_19
+        default 21 if PCNT_PIN_Z_GPIO_21
         default 22 if PCNT_PIN_Z_GPIO_22
         default 23 if PCNT_PIN_Z_GPIO_23
+        default 25 if PCNT_PIN_Z_GPIO_25
+        default 26 if PCNT_PIN_Z_GPIO_26
+        default 27 if PCNT_PIN_Z_GPIO_27
+        default 32 if PCNT_PIN_Z_GPIO_32
+        default 33 if PCNT_PIN_Z_GPIO_33
         default 34 if PCNT_PIN_Z_GPIO_34
-        default -1 if !PCNT_USE_INDEX_PIN
+        default 35 if PCNT_PIN_Z_GPIO_35
+        default 36 if PCNT_PIN_Z_GPIO_36
+        default 39 if PCNT_PIN_Z_GPIO_39
+
+    # Выбор для пина Z ******************************************************************************************
+
+    # Настройкой фильтра помех (glitch filter) ******************************************************************
+
+    config PCNT_GLITCH_FILTER_NS
+        int "Glitch filter time (nanoseconds)"
+        range 0 12500
+        default 2500
+        help
+            Игнорировать импульсы короче этого времени.
+            12500 нс (12.5 мкс) подходит для медленных энкодеров.
+            Для скоростных (высокое разрешение или обороты) уменьшите до 1000-5000.
+
+    # Настройкой фильтра помех (glitch filter) ******************************************************************
+
 endmenu

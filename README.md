@@ -1,3 +1,89 @@
+https://share.google/aimode/Rpqj61Ofw9J3qGZrA
+
+1. Добавить в menuconfig настройки для проекта:
+    - Настройки PCNT
+        - PCNT_PIN_A
+        - PCNT_PIN_B
+        - PCNT_PIN_Z
+
+```kconfig
+menu "Encoder PCNT Settings"
+
+# << Выбор для пина A
+    choice PCNT_PIN_A_SELECT
+        prompt "Select GPIO for Pulse Input (Phase A)"
+        default PCNT_PIN_A_GPIO_4
+        help
+            Выберите один из разрешенных GPIO для фазы A.
+
+        config PCNT_PIN_A_GPIO_4
+            bool "GPIO 4"
+        config PCNT_PIN_A_GPIO_5
+            bool "GPIO 5"
+        config PCNT_PIN_A_GPIO_18
+            bool "GPIO 18"
+    endchoice
+
+    # Невидимый конфиг для получения самого числа
+    config PCNT_PIN_A
+        int
+        default 4 if PCNT_PIN_A_GPIO_4
+        default 5 if PCNT_PIN_A_GPIO_5
+        default 18 if PCNT_PIN_A_GPIO_18
+
+# Выбор для пина A >>
+
+    # Выбор для пина A
+    choice PCNT_PIN_A_SELECT
+        prompt "Select GPIO for Pulse Input (Phase A)"
+        default PCNT_PIN_A_GPIO_4
+        help
+            Выберите один из разрешенных GPIO для фазы A.
+
+        config PCNT_PIN_A_GPIO_4
+            bool "GPIO 4"
+        config PCNT_PIN_A_GPIO_5
+            bool "GPIO 5"
+        config PCNT_PIN_A_GPIO_18
+            bool "GPIO 18"
+    endchoice
+
+    # Невидимый конфиг для получения самого числа
+    config PCNT_PIN_A
+        int
+        default 4 if PCNT_PIN_A_GPIO_4
+        default 5 if PCNT_PIN_A_GPIO_5
+        default 18 if PCNT_PIN_A_GPIO_18
+
+    # Выбор для пина A
+    choice PCNT_PIN_A_SELECT
+        prompt "Select GPIO for Pulse Input (Phase A)"
+        default PCNT_PIN_A_GPIO_4
+        help
+            Выберите один из разрешенных GPIO для фазы A.
+
+        config PCNT_PIN_A_GPIO_4
+            bool "GPIO 4"
+        config PCNT_PIN_A_GPIO_5
+            bool "GPIO 5"
+        config PCNT_PIN_A_GPIO_18
+            bool "GPIO 18"
+    endchoice
+
+    # Невидимый конфиг для получения самого числа
+    config PCNT_PIN_A
+        int
+        default 4 if PCNT_PIN_A_GPIO_4
+        default 5 if PCNT_PIN_A_GPIO_5
+        default 18 if PCNT_PIN_A_GPIO_18
+
+endmenu
+```
+
+
+
+
+
 34, 35, 36 — это "input-only" пины. У них нет встроенных подтяжек (pull-up/pull-down), поэтому ваши внешние резисторы на 1 кОм к 3.3В обязательны и правильны.
 
 Логика сигналов: Если энкодер замыкает на "массу" (GND), то при разомкнутом состоянии на пине будет 1 (высокий уровень), а при замыкании — 0 (низкий).
